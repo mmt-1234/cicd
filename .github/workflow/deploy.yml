@@ -1,0 +1,66 @@
+name: Node.js MVP CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # 수동 실행 버튼 추가 (디버깅용)
+
+env:
+  DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/backend-api
+
+jobs:
+  build-and-deploy: # Job을 하나로 합쳐서 환경 설정 시간을 단축
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install and Test
+        run: |
+          npm ci
+          npm test --passWithNoTests # 테스트 코드가 아직 없을 경우를 대비
+
+      - name: Authenticate to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # [개선] 별도 빌드 없이 바로 빌드 & 푸시 (캐시 활용 극대화)
+      - name: Build and Push
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          cache-from: type=gha # GitHub Actions 전용 고속 캐시 사용
+          cache-to: type=gha,mode=max
+
+      # [배포] SSH를 통한 원격 명령 실행
+      - name: Deploy to VPS
+        if: github.event_name == 'push'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/production-apps/backend-api
+            
+            # .env 파일 갱신 (MVP에선 간결하게 관리)
+            echo "IMAGE_TAG=${{ github.sha }}" > .env
+            echo "DOCKER_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env
+            
+            docker-compose pull
+            docker-compose up -d
+            docker image prune -f # 사용하지 않는 이미지만 빠르게 정리
