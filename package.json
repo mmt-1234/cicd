@@ -1,0 +1,41 @@
+{
+  "name": "todo-management-system",
+  "version": "1.0.0",
+  "description": "풀스택 할 일 관리 시스템 - Node.js + Express 백엔드와 Vanilla JS 프론트엔드",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "todo",
+    "task-management",
+    "fullstack",
+    "nodejs",
+    "express",
+    "rest-api",
+    "ci-cd",
+    "jest",
+    "vanilla-js"
+  ],
+  "author": "CI/CD Demo",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/todo-management-system"
+  }
+}

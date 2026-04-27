@@ -1,0 +1,166 @@
+/* 
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.search-container {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 45px 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 0.95em;
+    transition: all 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+.data-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.data-actions button {
+    padding: 8px 16px;
+    border: 1px solid #ced4da;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.3s;
+}
+
+.data-actions button:hover {
+    background-color: #f8f9fa;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    padding: 8px 16px;
+    border: 1px solid #ced4da;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.3s;
+}
+
+.file-input-label:hover {
+    background-color: #f8f9fa;
+}
+
+.categories-section {
+    margin-bottom: 30px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.category-item {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.category-item h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1em;
+}
+
+.category-item p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9em;
+}
+
+.todo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tag-remove {
+    cursor: pointer;
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.tag-remove:hover {
+    color: #c82333;
+}
+
+.keyboard-shortcuts {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.8em;
+    display: none;
+    z-index: 1000;
+}
+
+.keyboard-shortcuts.show {
+    display: block;
+}
+
+.keyboard-shortcuts h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+}
+
+.keyboard-shortcuts div {
+    margin-bottom: 5px;
+}
+
+.kbd {
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.8em;
+} */

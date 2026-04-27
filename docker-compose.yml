@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend-api:
+    # GitHub Actions 파이프라인에서 SSH를 통해 동적으로 주입하는 환경 변수(IMAGE_TAG)를 매핑하여 태그를 결정 
+    # 하드코딩된 'latest' 태그를 피하고, 특정 커밋 지점의 불변하는 식별자를 사용하여 예측 가능성 확보
+    image: ${DOCKER_USERNAME}/backend-api:${IMAGE_TAG:-latest}
+    container_name: production_nodejs_api
+    
+    # 서버 재부팅 시 또는 예기치 않은 프로세스 크래시 발생 시 Docker 데몬이 컨테이너를 무한 재시작하도록 정책 지정
+    restart: unless-stopped
+    
+    # 호스트의 80 포트를 컨테이너 내부 3000 포트와 연결
+    ports:
+      - "80:3000"
+      
+    # 런타임 환경 변수 구성
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      
+    # 로깅 드라이버의 용량 제한을 설정하여, 무한정 쌓이는 로그로 인해 VPS 디스크 용량이 100% 가득 차 서버가 다운되는 재앙 방지
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        
+    # 컨테이너가 무분별하게 호스트 자원을 고갈시키지 않도록 하드 리미트(Hard Limit) 설정 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
